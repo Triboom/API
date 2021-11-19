@@ -6,28 +6,39 @@ import { SaleId } from '../value-objects/sale-id.value';
 import { OrderQuantity } from '../value-objects/order-quantity.value';
 import { OrderStatus } from '../value-objects/order-status.value';
 import { SaleRegistered } from '../events/sale-registered.event';
+import { Money } from "../../../common/domain/value-objects/money.value";
+import { Product } from 'src/products/domain/entities/product.entity';
+import { Any } from 'typeorm';
 
 export class Sale extends AggregateRoot{
   private id: SaleId;
   private customerId: CustomerId;
-  private productIds: ProductId[];
+  private productId: ProductId;
   private orderQuantity: OrderQuantity;
   private dateTime: DateTime;
   private orderStatus: OrderStatus;
+  private price: Money;
 
-  constructor(id: SaleId, orderQuantity: OrderQuantity, dateTime: DateTime, orderStatus: OrderStatus) {
+  constructor(id: SaleId, orderQuantity: OrderQuantity, dateTime: DateTime, orderStatus: OrderStatus, customerId: CustomerId, productId: ProductId) {
     super();
     this.id = id;
     this.orderQuantity = orderQuantity;
     this.dateTime = dateTime;
     this.orderStatus = orderStatus;
-    this.productIds = [];
-    this.customerId = Object();
+    this.productId = productId;
+    this.customerId = customerId;
   }
 
   public register() {
-    const event = new SaleRegistered(this.id.getValue(), this.orderQuantity.getValue(), this.dateTime.getValue(), this.orderStatus.getValue());
+    const event = new SaleRegistered(this.id.getValue(), this.orderQuantity.getValue(), this.dateTime.getValue(), this.orderStatus.getValue(), this.customerId.getValue(), this.productId.getValue(), this.price.getValue());
     this.apply(event);
+  }
+  
+  private calcPrice(){
+    // ammount = Product by ID .getPrice() * this.orderQuantity
+    // currency = Product by ID .getCurrency();
+    // this.price = new Money(ammount, currency);
+    console.log("First we need to have a unit price of product")
   }
 
   public getId(): SaleId {
@@ -49,6 +60,18 @@ export class Sale extends AggregateRoot{
     this.id = id;
   }
 
+  public getCustomerId(): CustomerId {
+    return this.customerId;
+  }
+
+  public getProductId(): ProductId {
+    return this.productId;
+  }
+
+  public getPrice(): Money {
+    return this.price;
+  }
+
   public changeOrderQuantity(orderQuantity: OrderQuantity): void {
     this.orderQuantity = orderQuantity;
   }
@@ -59,5 +82,9 @@ export class Sale extends AggregateRoot{
 
   public changeOrderStatus(orderStatus: OrderStatus): void {
     this.orderStatus = orderStatus;
+  }
+
+  public changePrice(price: Money): void {
+    this.price = price;
   }
 }

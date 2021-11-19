@@ -44,4 +44,8 @@ export class Money {
   public getCurrency(): string {
     return this.currency;
   }
+
+  public getValue(): number {
+    return this.amount;
+  }
 }

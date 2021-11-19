@@ -22,7 +22,7 @@ export class SalesController{
   ): Promise<object> {
     try{
       // @ts-ignore
-      const result: Result<AppNotification, RegisterSaleResponseDto> = await this.salesApplicationService.register(RegisterSaleRequestDto);
+      const result: Result<AppNotification, RegisterSaleResponseDto> = await this.salesApplicationService.register(registerSaleRequestDto);
       if (result.isSuccess()) {
         return ApiController.created(response, result.value);
       }

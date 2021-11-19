@@ -24,6 +24,9 @@ export class SaleApplicationService {
       registerSaleRequestDto.orderQuantity,
       registerSaleRequestDto.dateTime,
       registerSaleRequestDto.orderStatus,
+      registerSaleRequestDto.customerId,
+      registerSaleRequestDto.productId,
+      registerSaleRequestDto.price
     );
     const saleId = await this.commandBus.execute(registerSaleCommand);
     const registerSaleResponseDto: RegisterSaleResponseDto = new RegisterSaleResponseDto(
@@ -31,6 +34,9 @@ export class SaleApplicationService {
       registerSaleRequestDto.orderQuantity,
       registerSaleRequestDto.dateTime,
       registerSaleRequestDto.orderStatus,
+      registerSaleRequestDto.customerId,
+      registerSaleRequestDto.productId,
+      registerSaleRequestDto.price
     );
     return Result.ok(registerSaleResponseDto);
   }
