@@ -1,6 +1,5 @@
 import { Body, Controller, Get, Post, Res } from "@nestjs/common";
 import { QueryBus } from "@nestjs/cqrs";
-import { response } from "express";
 import { ApiController } from "src/common/api/api.controller";
 import { AppNotification } from "src/common/application/app.notification";
 import { RegisterProductResquestDto } from "../application/dtos/request/register-product-request.dto";

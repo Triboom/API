@@ -38,7 +38,7 @@ export class RegisterCustomerHandler
       return 0;
     }
     const customerId:number = Number(customerTypeORM.id.value);
-    customer.changeId(CustomerId.create(customerId));
+    customer.changeId(CustomerId.createCustomer(customerId));
     customer = this.publisher.mergeObjectContext(customer);
     customer.register();
     customer.commit();

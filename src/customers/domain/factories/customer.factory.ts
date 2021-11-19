@@ -5,10 +5,10 @@ import { Name } from '../../../common/domain/value-objects/name.value';
 
 export class CustomerFactory {
   public static createFrom(name: Name, dni: Dni): Customer {
-    return new Customer(CustomerId.create(0), name, dni);
+    return new Customer( name, dni);
   }
 
-  public static withId(customerId: CustomerId, name: Name, dni: Dni): Customer {
-    return new Customer(customerId, name, dni);
+  public static withId(name: Name, dni: Dni): Customer {
+    return new Customer(name, dni);
   }
 }

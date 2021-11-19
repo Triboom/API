@@ -5,10 +5,10 @@ import {ProductId} from '../value-objects/product-id.value';
 
 export class ProductFactory {
     public static createFrom(name:ProductName, price:Money ): Product{
-        return new Product(ProductId.create(0), name, price);
+        return new Product(name, price);
     }
 
-    public static withId(productId: ProductId, name: ProductName, price: Money): Product {
-        return new Product(productId, name, price);
+    public static withId(name: ProductName, price: Money): Product {
+        return new Product( name, price);
     }
 }

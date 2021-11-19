@@ -9,9 +9,8 @@ export class Product extends AggregateRoot{
   private name: ProductName;
   private price: Money;
 
-  constructor(id: ProductId, name: ProductName, price: Money ) {
+  constructor(name: ProductName, price: Money ) {
     super();
-    this.id = id;
     this.name = name;
     this.price = price;
   }
