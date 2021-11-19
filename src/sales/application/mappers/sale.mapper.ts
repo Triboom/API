@@ -4,8 +4,8 @@ import { SaleIdTypeORM } from '../../infrastructure/persistence/typeorm/entities
 import { SaleOrderStatusTypeORM } from '../../infrastructure/persistence/typeorm/entities/sale.order-status.typeorm';
 import { SaleOrderQuantityTypeORM } from '../../infrastructure/persistence/typeorm/entities/sale.order-quantity.typeorm';
 import { SaleDateTimeTypeORM } from '../../infrastructure/persistence/typeorm/entities/sale.date-time.typeorm';
-import { CustomerIdTypeORM } from 'src/sales/infrastructure/persistence/typeorm/entities/customer-id.typeorm';
-import { ProductIdTypeORM } from 'src/sales/infrastructure/persistence/typeorm/entities/product-id.typeorm';
+import { CustomerIdForSalesTypeORM } from 'src/sales/infrastructure/persistence/typeorm/entities/customer-id-sale.typeorm';
+import { ProductIdForSalesTypeORM } from 'src/sales/infrastructure/persistence/typeorm/entities/product-id-sale.typeorm';
 import { MoneyTypeORM } from 'src/common/infrastructure/persistence/typeorm/entities/money.typeorm';
 
 export class SaleMapper {
@@ -15,8 +15,8 @@ export class SaleMapper {
     saleTypeORM.orderQuantity = SaleOrderQuantityTypeORM.from(sale.getOrderQuantity().getValue());
     saleTypeORM.dateTime = SaleDateTimeTypeORM.from(sale.getDateTime().getValue());
     saleTypeORM.orderStatus = SaleOrderStatusTypeORM.from(sale.getOrderStatus().getValue());
-    saleTypeORM.customerId = CustomerIdTypeORM.from(sale.getCustomerId().getValue());
-    saleTypeORM.productId = ProductIdTypeORM.from(sale.getProductId().getValue());
+    saleTypeORM.customerId = CustomerIdForSalesTypeORM.from(sale.getCustomerId().getValue());
+    saleTypeORM.productId = ProductIdForSalesTypeORM.from(sale.getProductId().getValue());
     saleTypeORM.price = MoneyTypeORM.from(sale.getPrice().getAmount(), sale.getPrice().getCurrency());
     return saleTypeORM;
   }

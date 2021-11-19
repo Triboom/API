@@ -3,9 +3,10 @@ import { SaleIdTypeORM } from './sale.id.typeorm';
 import { SaleOrderQuantityTypeORM } from './sale.order-quantity.typeorm';
 import { SaleDateTimeTypeORM } from './sale.date-time.typeorm';
 import { SaleOrderStatusTypeORM } from './sale.order-status.typeorm';
-import { CustomerIdTypeORM } from '../../../../../customers/infrastructure/persistence/typeorm/entities/customer.id.typeorm';
+import { CustomerIdForSalesTypeORM } from './customer-id-sale.typeorm';
+import { CustomerIdTypeORM } from 'src/customers/infrastructure/persistence/typeorm/entities/customer.id.typeorm';
 import { MoneyTypeORM } from 'src/common/infrastructure/persistence/typeorm/entities/money.typeorm';
-import { ProductIdTypeORM } from 'src/products/infrastructure/persistence/typeorm/entities/product.id.typeorm';
+import { ProductIdForSalesTypeORM } from './product-id-sale.typeorm';
 
 @Entity('sales')
 export class SaleTypeORM {
@@ -24,10 +25,10 @@ export class SaleTypeORM {
   @Column((type) => MoneyTypeORM, { prefix: false })
   public price: MoneyTypeORM;
 
-  @Column((type) => CustomerIdTypeORM, { prefix: false })
-  public customerId: CustomerIdTypeORM;
+  @Column((type) => CustomerIdForSalesTypeORM, { prefix: false })
+  public customerId: CustomerIdForSalesTypeORM;
 
-  @Column((type) => ProductIdTypeORM, { prefix: false })
-  public productId: ProductIdTypeORM;
+  @Column((type) => ProductIdForSalesTypeORM, { prefix: false })
+  public productId: ProductIdForSalesTypeORM;
 
 }

@@ -19,6 +19,10 @@ export class ProductId {
     return Result.ok(new ProductId(value));
   }
 
+  public static createProduct(value: number){
+    return new ProductId(value);
+  }
+
   public getValue(): number {
     return this.value;
   }

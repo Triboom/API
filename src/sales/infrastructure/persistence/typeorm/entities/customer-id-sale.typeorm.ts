@@ -1,6 +1,6 @@
 import { Column } from 'typeorm';
 
-export class CustomerIdTypeORM {
+export class CustomerIdForSalesTypeORM {
     @Column('bigint', { name: 'customer_id', unsigned: true })
     public value: number;
   
@@ -8,7 +8,7 @@ export class CustomerIdTypeORM {
       this.value = value;
     }
   
-    public static from(value: number): CustomerIdTypeORM  {
-      return new CustomerIdTypeORM(value);
+    public static from(value: number): CustomerIdForSalesTypeORM  {
+      return new CustomerIdForSalesTypeORM(value);
     }
   }

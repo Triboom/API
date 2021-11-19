@@ -39,7 +39,7 @@ export class RegisterProductHandler implements ICommandHandler<RegisterProductCo
         }
         
         const productId: number = Number(productTypeORM.id.value);
-        product.changeId(ProductId.create(productId));
+        product.changeId(ProductId.createProduct(productId));
         product = this.publisher.mergeObjectContext(product); // ?
         product.register();
         product.commit();

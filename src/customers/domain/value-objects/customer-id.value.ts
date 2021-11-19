@@ -18,6 +18,9 @@ export class CustomerId {
     }
     return Result.ok(new CustomerId(value));
   }
+  public static createCustomer(value: number){
+    return new CustomerId(value);
+  }
 
   public getValue(): number {
     return this.value;
