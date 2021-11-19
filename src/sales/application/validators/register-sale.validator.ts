@@ -14,6 +14,7 @@ export class RegisterSaleValidator{
     registerSaleRequestDto: RegisterSaleRequestDto,
   ): Promise<AppNotification> {
     let notification: AppNotification = new AppNotification();
+
     const orderQuantity: number = registerSaleRequestDto.orderQuantity;
     if (orderQuantity == null || orderQuantity < 0) {
       notification.addError('Sale orderQuantity is required or is less than 0', null);
@@ -27,6 +28,21 @@ export class RegisterSaleValidator{
     const orderStatus: Boolean = registerSaleRequestDto.orderStatus;
     if (orderStatus == null) {
       notification.addError('Sale orderStatus is required', null);
+    }
+
+    const price: number = registerSaleRequestDto.price;
+    if (price == null) {
+      notification.addError('Sale price amount is required', null);
+    }
+
+    const productId: number = registerSaleRequestDto.productId;
+    if (productId == null) {
+      notification.addError('Sale productId is required', null);
+    }
+    
+    const customerId: number = registerSaleRequestDto.customerId;
+    if (customerId == null) {
+      notification.addError('Sale customerId is required', null);
     }
 
     if (notification.hasErrors()) {

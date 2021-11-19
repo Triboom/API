@@ -12,6 +12,11 @@ import { Sale } from '../../../domain/entities/sale.entity';
 import { SaleFactory } from '../../../domain/factories/sale.factory';
 import { SaleMapper } from '../../mappers/sale.mapper';
 import { SaleId } from '../../../domain/value-objects/sale-id.value';
+import { Product } from 'src/products/domain/entities/product.entity';
+import { Customer } from 'src/customers/domain/entities/customer.entity';
+import { CustomerId } from 'src/customers/domain/value-objects/customer-id.value';
+import { ProductId } from 'src/products/domain/value-objects/product-id.value';
+import { Money } from 'src/common/domain/value-objects/money.value';
 
 export class RegisterSaleHandler implements ICommandHandler<RegisterSaleCommand>{
   constructor(
@@ -35,8 +40,23 @@ export class RegisterSaleHandler implements ICommandHandler<RegisterSaleCommand>
     if (orderStatusResult.isFailure()) {
       return 0;
     }
+
+    const productIdResult: Result<AppNotification, ProductId> = ProductId.create(command.productId);
+    if (productIdResult.isFailure()) {
+      return 0;
+    }
+
+    const customerIdResult: Result<AppNotification, CustomerId> = CustomerId.create(command.customerId);
+    if (customerIdResult.isFailure()){
+      return 0;
+    }
+
+    const priceResult : Result<AppNotification, Money> = Money.create(command.price, "PEN")
+    if(priceResult.isFailure()){
+      return 0;
+    }
     
-    let sale: Sale = SaleFactory.createFrom(orderQuantityResult.value, dateTimeResult.value, orderStatusResult.value);
+    let sale: Sale = SaleFactory.createFrom(orderQuantityResult.value, dateTimeResult.value, orderStatusResult.value, customerIdResult.value, productIdResult.value);
     let saleTypeORM = SaleMapper.toTypeORM(sale);
     saleTypeORM = await this.saleRepository.save(saleTypeORM);
     if (saleTypeORM == null) {
