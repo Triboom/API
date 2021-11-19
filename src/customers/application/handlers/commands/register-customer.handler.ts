@@ -11,7 +11,7 @@ import { AppNotification } from '../../../../common/application/app.notification
 import { CustomerTypeORM } from '../../../infrastructure/persistence/typeorm/entities/customer.typeorm';
 import { Name } from '../../../../common/domain/value-objects/name.value';
 import { CustomerMapper } from '../../mappers/customer.mapper';
-
+//Command
 @CommandHandler(RegisterCustomerCommand)
 export class RegisterCustomerHandler
   implements ICommandHandler<RegisterCustomerCommand> {
