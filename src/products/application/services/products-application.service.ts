@@ -10,8 +10,8 @@ import { RegisterProductResponseDto } from "../dtos/response/register-product-re
 @Injectable()
 export class ProductApplicationService{
     constructor(
-        private commandBus: CommandBus,
-        private registerProductValidator: RegisterProductValidator){}
+      private commandBus: CommandBus,
+      private registerProductValidator: RegisterProductValidator){}
 
     async register(registerProductResquestDto: RegisterProductResquestDto
         ):Promise<Result<AppNotification, RegisterProductResquestDto>>{

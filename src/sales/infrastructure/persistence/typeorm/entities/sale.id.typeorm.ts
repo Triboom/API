@@ -1,6 +1,6 @@
 import { PrimaryGeneratedColumn } from 'typeorm';
 
-export class ProductIdTypeORM {
+export class SaleIdTypeORM {
   @PrimaryGeneratedColumn('increment', { type: 'bigint', name: 'id', unsigned: true })
   public value: number;
 
@@ -8,7 +8,7 @@ export class ProductIdTypeORM {
     this.value = value;
   }
 
-  public static from(value: number): ProductIdTypeORM {
-    return new ProductIdTypeORM(value);
+  public static from(value: number): SaleIdTypeORM {
+    return new SaleIdTypeORM(value);
   }
 }
