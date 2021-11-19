@@ -1,7 +1,7 @@
-import { PrimaryGeneratedColumn } from 'typeorm';
+import { Column, PrimaryGeneratedColumn } from "typeorm";
 
 export class SaleOrderStatusTypeORM {
-  @PrimaryGeneratedColumn('increment', { type: 'bigint', name: 'orderStatus', unsigned: true })
+  @Column('boolean', { name: 'orderStatus', nullable: false })
   public value: boolean;
 
   private constructor(value: boolean) {

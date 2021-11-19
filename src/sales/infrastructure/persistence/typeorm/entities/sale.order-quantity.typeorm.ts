@@ -1,7 +1,7 @@
-import { PrimaryGeneratedColumn } from 'typeorm';
+import { Column, PrimaryGeneratedColumn } from "typeorm";
 
 export class SaleOrderQuantityTypeORM {
-  @PrimaryGeneratedColumn('increment', { type: 'bigint', name: 'orderQuantity', unsigned: true })
+  @Column('int', { name: 'name', nullable: false })
   public value: number;
 
   private constructor(value: number) {

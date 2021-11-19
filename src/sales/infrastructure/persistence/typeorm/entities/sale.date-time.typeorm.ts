@@ -1,8 +1,8 @@
-import { PrimaryGeneratedColumn } from 'typeorm';
+import { Column, PrimaryGeneratedColumn } from "typeorm";
 
 export class SaleDateTimeTypeORM {
-  @PrimaryGeneratedColumn('increment', { type: 'bigint', name: 'dateTime', unsigned: true })
-  public value: Date;
+  @Column('date', { name: 'dateTime', nullable: false })
+  public value: Date
 
   private constructor(value: Date) {
     this.value = value;
