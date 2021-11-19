@@ -1,7 +1,7 @@
 import { Column, PrimaryGeneratedColumn } from "typeorm";
 
 export class SaleOrderQuantityTypeORM {
-  @Column('int', { name: 'name', nullable: false })
+  @Column('int', { name: 'orderQuantity', nullable: false })
   public value: number;
 
   private constructor(value: number) {
