@@ -27,6 +27,7 @@ export class RegisterSaleHandler implements ICommandHandler<RegisterSaleCommand>
   }
 
   async execute(command: RegisterSaleCommand){
+
     const orderQuantityResult: Result<AppNotification, OrderQuantity> = OrderQuantity.create(command.orderQuantity)
     if (orderQuantityResult.isFailure()) {
       return 0;
@@ -63,7 +64,8 @@ export class RegisterSaleHandler implements ICommandHandler<RegisterSaleCommand>
       return 0;
     }
     const saleId:number = Number(saleTypeORM.id.value);
-    sale.changeId(SaleId.create(saleId));
+    const saleIdResult: Result<AppNotification, SaleId> = SaleId.create(saleId);
+    sale.changeId(saleIdResult);
     sale = this.publisher.mergeObjectContext(sale);
     sale.register();
     sale.commit();

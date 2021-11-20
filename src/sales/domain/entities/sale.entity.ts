@@ -9,6 +9,8 @@ import { SaleRegistered } from '../events/sale-registered.event';
 import { Money } from "../../../common/domain/value-objects/money.value";
 import { Product } from 'src/products/domain/entities/product.entity';
 import { Any } from 'typeorm';
+import { Result } from "typescript-result";
+import { AppNotification } from "../../../common/application/app.notification";
 
 export class Sale extends AggregateRoot{
   private id: SaleId;
@@ -56,7 +58,7 @@ export class Sale extends AggregateRoot{
     return this.orderStatus;
   }
 
-  public changeId(id: SaleId) {
+  public changeId(id: Result<AppNotification, SaleId>) {
     this.id = id;
   }
 

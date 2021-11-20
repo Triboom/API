@@ -1,4 +1,3 @@
-
 export class RegisterSaleRequestDto {
   constructor(
     public readonly orderQuantity: number,

@@ -1,7 +1,7 @@
-import { Result } from 'typescript-result';
-import { AppNotification } from '../../application/app.notification';
+import { Result } from "typescript-result";
+import { AppNotification } from "../../../common/application/app.notification";
 
-export class Address {
+export class AddressValue {
   private address: string;
   private districtId: string;
   private static ADDRESS_MAX_LENGTH: number = 100;
@@ -12,7 +12,7 @@ export class Address {
     this.districtId = districtId;
   }
 
-  public static create(address: string, districtId: string): Result<AppNotification, Address> {
+  public static create(address: string, districtId: string): Result<AppNotification, AddressValue> {
     let notification: AppNotification = new AppNotification();
     address = (address ?? "").trim();
     districtId = (districtId ?? "").trim();
@@ -32,10 +32,10 @@ export class Address {
     if (regExp.test(districtId) === false) {
       notification.addError('districtId format is invalid', null);
     }
-    if (notification.hasErrors()) {
+    if(notification.hasErrors()) {
       return Result.error(notification);
     }
-    return Result.ok(new Address(address, districtId));
+    return Result.ok(new AddressValue(address, districtId));
   }
 
   public getAddress():string{
