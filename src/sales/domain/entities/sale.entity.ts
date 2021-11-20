@@ -9,6 +9,8 @@ import { SaleRegistered } from '../events/sale-registered.event';
 import { Money } from "../../../common/domain/value-objects/money.value";
 import { Product } from 'src/products/domain/entities/product.entity';
 import { Any } from 'typeorm';
+import { Result } from "typescript-result";
+import { AppNotification } from "../../../common/application/app.notification";
 
 export class Sale extends AggregateRoot{
   private id: SaleId;
@@ -19,9 +21,8 @@ export class Sale extends AggregateRoot{
   private orderStatus: OrderStatus;
   private price: Money;
 
-  constructor(id: SaleId, orderQuantity: OrderQuantity, dateTime: DateTime, orderStatus: OrderStatus, customerId: CustomerId, productId: ProductId) {
+  constructor(orderQuantity: OrderQuantity, dateTime: DateTime, orderStatus: OrderStatus, customerId: CustomerId, productId: ProductId) {
     super();
-    this.id = id;
     this.orderQuantity = orderQuantity;
     this.dateTime = dateTime;
     this.orderStatus = orderStatus;
@@ -65,6 +66,7 @@ export class Sale extends AggregateRoot{
   }
 
   public getProductId(): ProductId {
+
     return this.productId;
   }
 

@@ -5,9 +5,10 @@ import { CustomersModule } from './customers/customers.module';
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ProductsModule } from './products/products.module';
 import { SalesModule } from './sales/sales.module';
+import { DeliveriesModule } from "./deliveries/deliveries.module";
 
 @Module({
-  imports: [CustomersModule, ProductsModule, SalesModule, TypeOrmModule.forRoot()],
+  imports: [CustomersModule, ProductsModule, SalesModule, DeliveriesModule, TypeOrmModule.forRoot()],
   controllers: [AppController],
   providers: [AppService],
 })

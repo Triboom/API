@@ -1,4 +1,3 @@
-
 export class RegisterSaleResponseDto {
   constructor(
     public id: number,
