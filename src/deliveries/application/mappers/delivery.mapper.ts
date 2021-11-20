@@ -11,9 +11,9 @@ export class DeliveryMapper{
     const deliveryTypeOrm: DeliveryTypeorm = new DeliveryTypeorm();
     deliveryTypeOrm.id = DeliveryIdTypeorm.from(delivery.getId().getValue());
     deliveryTypeOrm.address = AddressTypeorm.from(delivery.getAddress(),delivery.getDistrict());
-    deliveryTypeOrm.estimatedDeliveryDate = EstimatedDeliveryDateTypeorm.from(delivery.getEstimatedDate());
-    deliveryTypeOrm.deliveryDate = DeliveryDateTypeorm.from(delivery.getDeliveryDate());
-    deliveryTypeOrm.deliveryStatus = DeliveryStatusTypeorm.from(delivery.getStatus());
+    deliveryTypeOrm.estimatedDeliveryDate = EstimatedDeliveryDateTypeorm.from(delivery.getEstimatedDate().getValue());
+    deliveryTypeOrm.deliveryDate = DeliveryDateTypeorm.from(delivery.getDeliveryDate().getValue());
+    deliveryTypeOrm.deliveryStatus = DeliveryStatusTypeorm.from(delivery.getStatus().getValue());
     return deliveryTypeOrm;
   }
 }

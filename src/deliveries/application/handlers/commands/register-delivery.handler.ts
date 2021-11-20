@@ -40,7 +40,7 @@ export class RegisterDeliveryHandler implements ICommandHandler<RegisterDelivery
     if (deliveryTypeOrm == null){
       return 0;
     }
-    const deliveryId: number = Number(deliveryTypeOrm.id.value);
+    let deliveryId: number = Number(deliveryTypeOrm.id.value);
     delivery.changeId(DeliveryId.of(deliveryId));
     delivery = this.publisher.mergeObjectContext(delivery);
     delivery.register();

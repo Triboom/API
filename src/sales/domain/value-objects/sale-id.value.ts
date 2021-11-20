@@ -19,6 +19,10 @@ export class SaleId{
     return Result.ok(new SaleId(value));
   }
 
+  public static createSale(value: number) {
+    return new SaleId(value);
+  }
+
   public getValue(): number {
     return this.value;
   }

@@ -8,10 +8,6 @@ import { CustomerId } from 'src/customers/domain/value-objects/customer-id.value
 
 export class SaleFactory {
   public static createFrom(orderQuantity: OrderQuantity, dateTime: DateTime, orderStatus: OrderStatus, customerId: CustomerId, productId: ProductId ): Sale {
-    return new Sale(SaleId.create(0), orderQuantity, dateTime, orderStatus, customerId, productId);
-  }
-
-  public static withId(saleId: SaleId, orderQuantity: OrderQuantity, dateTime: DateTime, orderStatus: OrderStatus, customerId: CustomerId, productId: ProductId): Sale {
-    return new Sale(saleId, orderQuantity, dateTime, orderStatus, customerId, productId);
+    return new Sale(orderQuantity, dateTime, orderStatus, customerId, productId);
   }
 }

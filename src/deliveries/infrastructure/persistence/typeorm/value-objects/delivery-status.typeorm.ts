@@ -9,7 +9,7 @@ export class DeliveryStatusTypeorm{
     this.value = value;
   }
 
-  public static from(value: DeliveryStatus): DeliveryStatusTypeorm {
+  public static from(value: number): DeliveryStatusTypeorm {
     return new DeliveryStatusTypeorm(value);
   }
 }

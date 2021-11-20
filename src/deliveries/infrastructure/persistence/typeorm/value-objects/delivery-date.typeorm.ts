@@ -9,7 +9,7 @@ export class DeliveryDateTypeorm {
     this.value = value;
   }
 
-  public static from(value: DateTime): DeliveryDateTypeorm {
+  public static from(value: Date): DeliveryDateTypeorm {
     return new DeliveryDateTypeorm (value);
   }
 }

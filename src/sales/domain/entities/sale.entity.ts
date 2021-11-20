@@ -21,9 +21,8 @@ export class Sale extends AggregateRoot{
   private orderStatus: OrderStatus;
   private price: Money;
 
-  constructor(id: SaleId, orderQuantity: OrderQuantity, dateTime: DateTime, orderStatus: OrderStatus, customerId: CustomerId, productId: ProductId) {
+  constructor(orderQuantity: OrderQuantity, dateTime: DateTime, orderStatus: OrderStatus, customerId: CustomerId, productId: ProductId) {
     super();
-    this.id = id;
     this.orderQuantity = orderQuantity;
     this.dateTime = dateTime;
     this.orderStatus = orderStatus;
@@ -58,7 +57,7 @@ export class Sale extends AggregateRoot{
     return this.orderStatus;
   }
 
-  public changeId(id: Result<AppNotification, SaleId>) {
+  public changeId(id: SaleId) {
     this.id = id;
   }
 
@@ -67,6 +66,7 @@ export class Sale extends AggregateRoot{
   }
 
   public getProductId(): ProductId {
+
     return this.productId;
   }
 
