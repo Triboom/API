@@ -1,4 +1,4 @@
-import { EventPublisher, ICommandHandler } from "@nestjs/cqrs";
+import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { DeliveryTypeorm } from "../../../infrastructure/persistence/typeorm/entities/delivery.typeorm";
 import { Repository } from "typeorm";
@@ -12,7 +12,10 @@ import { Delivery } from "../../../domain/entities/delivery.entity";
 import { DeliveryFactory } from "../../../domain/factories/delivery.factory";
 import { DeliveryMapper } from "../../mappers/delivery.mapper";
 import { DeliveryId } from "../../../domain/value-objects/delivery-id.value";
+import { DeliveryStatus } from "../../../domain/value-objects/delivery-status.value";
 
+
+@CommandHandler(RegisterDeliveryCommand)
 export class RegisterDeliveryHandler implements ICommandHandler<RegisterDeliveryCommand>{
   constructor(
     @InjectRepository(DeliveryTypeorm)
@@ -34,7 +37,12 @@ export class RegisterDeliveryHandler implements ICommandHandler<RegisterDelivery
       return 0;
     }
 
-    let delivery: Delivery = DeliveryFactory.createFrom(saleIdResult.value, addressResult.value, estimatedDate.value);
+    const deliveryStatus: Result<AppNotification, DeliveryStatus> = DeliveryStatus.create(1);
+    if(deliveryStatus.isFailure()){
+      return 0;
+    }
+
+    let delivery: Delivery = DeliveryFactory.createFrom(saleIdResult.value, addressResult.value, estimatedDate.value, deliveryStatus.value);
     let deliveryTypeOrm = DeliveryMapper.toTypeOrm(delivery);
     deliveryTypeOrm = await this.deliveryRepository.save(deliveryTypeOrm);
     if (deliveryTypeOrm == null){

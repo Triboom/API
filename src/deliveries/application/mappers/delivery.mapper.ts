@@ -9,7 +9,7 @@ import { DeliveryStatusTypeorm } from "../../infrastructure/persistence/typeorm/
 export class DeliveryMapper{
   public static toTypeOrm(delivery: Delivery): DeliveryTypeorm {
     const deliveryTypeOrm: DeliveryTypeorm = new DeliveryTypeorm();
-    deliveryTypeOrm.id = DeliveryIdTypeorm.from(delivery.getId().getValue());
+    deliveryTypeOrm.saleId = DeliveryIdTypeorm.from(delivery.getSaleId().getValue());
     deliveryTypeOrm.address = AddressTypeorm.from(delivery.getAddress(),delivery.getDistrict());
     deliveryTypeOrm.estimatedDeliveryDate = EstimatedDeliveryDateTypeorm.from(delivery.getEstimatedDate().getValue());
     deliveryTypeOrm.deliveryDate = DeliveryDateTypeorm.from(delivery.getDeliveryDate().getValue());

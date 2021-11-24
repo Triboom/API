@@ -34,6 +34,8 @@ export class Sale extends AggregateRoot{
     const event = new SaleRegistered(this.id.getValue(), this.orderQuantity.getValue(), this.dateTime.getValue(), this.orderStatus.getValue(), this.customerId.getValue(), this.productId.getValue(), this.price.getValue());
     this.apply(event);
   }
+
+
   
   private calcPrice(){
     // ammount = Product by ID .getPrice() * this.orderQuantity

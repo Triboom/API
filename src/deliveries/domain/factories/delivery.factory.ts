@@ -6,8 +6,7 @@ import { DeliveryStatus } from "../value-objects/delivery-status.value";
 import { DateTime } from "../../../common/domain/value-objects/date-time.value";
 
 export class DeliveryFactory {
-  public static createFrom(saleId: SaleId, address: Address, estimatedDate: DateTime){
-    let status: any = DeliveryStatus.create(1);
+  public static createFrom(saleId: SaleId, address: Address, estimatedDate: DateTime, status: DeliveryStatus){
     return new Delivery(saleId, address, estimatedDate, estimatedDate, status);
   }
 }

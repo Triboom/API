@@ -15,9 +15,10 @@ export class GetSalesHandler implements IQueryHandler<GetSalesQuery>{
           orderQuantity,
           orderStatus,
           dateTime,
-          price,
-          customerId,
-          productId
+          ammount,
+          currency,
+          customer_id,
+          product_id
         FROM 
           sales;`;
     const ormSales = await manager.query(sql);

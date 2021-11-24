@@ -12,12 +12,12 @@ export class GetDeliveriesHandler implements IQueryHandler<GetDeliveriesQuery>{
     const sql =`
         SELECT 
           id,
-          saleId,
+          sale_id,
           address,
           district,
-          estimatedDate,
-          deliveryDate,
-          deliveryStatus
+          estimated_delivery_date,
+          delivery_date,
+          delivery_status
         FROM
           deliveries;`;
     const ormDeliveries = await manager.query(sql);
