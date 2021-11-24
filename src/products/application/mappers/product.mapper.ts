@@ -7,7 +7,7 @@ import { ProductTypeORM } from "src/products/infrastructure/persistence/typeorm/
 export class ProductMapper {
     public static toTypeORM(product: Product): ProductTypeORM{
         const productTypeORM: ProductTypeORM = new ProductTypeORM();
-        productTypeORM.id = ProductIdTypeORM.from(product.getId().getValue());
+        // wtf why????? productTypeORM.id = ProductIdTypeORM.from(product.getId().getValue());
         productTypeORM.name = ProductNameTypeORM.from(product.getName().getProductName());
         productTypeORM.price = MoneyTypeORM.from(product.getPrice().getAmount(),product.getPrice().getCurrency())
         return productTypeORM;

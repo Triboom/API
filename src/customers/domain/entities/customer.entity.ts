@@ -11,9 +11,8 @@ export class Customer extends AggregateRoot {
   private dni: Dni;
   //private accountIds: AccountId[];
 
-  public constructor(id: CustomerId, name: Name, dni: Dni) {
+  public constructor(name: Name, dni: Dni) {
     super();
-    this.id = id;
     this.name = name;
     this.dni = dni;
     //this.accountIds = [];

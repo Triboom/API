@@ -28,13 +28,21 @@ export class Address {
     if (districtId.length != this.DISTRICT_ID_MAX_LENGTH) {
       notification.addError('districtId field must have ' + this.DISTRICT_ID_MAX_LENGTH + ' characters', null);
     }
-    const regExp = new RegExp('^[0-9]$');
+    /*const regExp = new RegExp('^[0-9]+$');
     if (regExp.test(districtId) === false) {
       notification.addError('districtId format is invalid', null);
-    }
+    }*/
     if (notification.hasErrors()) {
       return Result.error(notification);
     }
     return Result.ok(new Address(address, districtId));
+  }
+
+  public getAddress():string{
+    return this.address;
+  }
+
+  public getDistrict(): string{
+    return this.districtId;
   }
 }
