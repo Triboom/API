@@ -1,12 +1,12 @@
 import { Body, Controller, Get, Post, Res } from "@nestjs/common";
 import { QueryBus } from "@nestjs/cqrs";
-import { response } from "express";
 import { ApiController } from "src/common/api/api.controller";
 import { AppNotification } from "src/common/application/app.notification";
 import { SaleApplicationService } from '../application/services/sales-applicationService';
 import { RegisterSaleRequestDto } from '../application/dtos/request/register-sale-request.dto';
 import { RegisterSaleResponseDto } from '../application/dtos/response/register-sale-response.dto';
 import { GetSalesQuery } from '../application/queries/get-sales.query';
+import { Result } from "typescript-result";
 
 @Controller('sales')
 export class SalesController{

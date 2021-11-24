@@ -7,7 +7,7 @@ import { DniTypeORM } from '../../../common/infrastructure/persistence/typeorm/e
 export class CustomerMapper {
   public static toTypeORM(customer: Customer): CustomerTypeORM {
     const customerTypeORM: CustomerTypeORM = new CustomerTypeORM();
-    customerTypeORM.id = CustomerIdTypeORM.from(customer.getId().getValue());
+    //customerTypeORM.id = CustomerIdTypeORM.from(customer.getId().getValue());
     customerTypeORM.name = NameTypeORM.from(customer.getName().getFirstName(), customer.getName().getLastName());
     customerTypeORM.dni = DniTypeORM.from(customer.getDni().getValue());
     return customerTypeORM;

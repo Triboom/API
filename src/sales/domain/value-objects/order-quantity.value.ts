@@ -14,7 +14,7 @@ export class OrderQuantity{
     if (quantity == 0) {
       notification.addError('quantity is required', null);
     }
-    if (quantity != this.MAX_LENGTH) {
+    if (quantity >= this.MAX_LENGTH) {
       notification.addError('quantity field must have ' + OrderQuantity.MAX_LENGTH + ' elements', null);
     }
     if (notification.hasErrors()) {

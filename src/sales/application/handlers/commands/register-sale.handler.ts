@@ -1,4 +1,4 @@
-import { EventPublisher, ICommandHandler } from '@nestjs/cqrs';
+import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { RegisterSaleCommand } from '../../commands/register-sale.command';
 import { SaleTypeORM } from '../../../infrastructure/persistence/typeorm/entities/sale.typeorm';
 import { Repository } from 'typeorm';
@@ -18,6 +18,7 @@ import { CustomerId } from 'src/customers/domain/value-objects/customer-id.value
 import { ProductId } from 'src/products/domain/value-objects/product-id.value';
 import { Money } from 'src/common/domain/value-objects/money.value';
 
+@CommandHandler(RegisterSaleCommand)
 export class RegisterSaleHandler implements ICommandHandler<RegisterSaleCommand>{
   constructor(
     @InjectRepository(SaleTypeORM)
@@ -61,6 +62,7 @@ export class RegisterSaleHandler implements ICommandHandler<RegisterSaleCommand>
     let saleTypeORM = SaleMapper.toTypeORM(sale);
     saleTypeORM = await this.saleRepository.save(saleTypeORM);
     if (saleTypeORM == null) {
+
       return 0;
     }
     const saleId:number = Number(saleTypeORM.id.value);

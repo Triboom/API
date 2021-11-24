@@ -31,6 +31,9 @@ export class Delivery extends AggregateRoot {
     return this.id;
   }
 
+  public getSaleId(){
+    return this.saleId;
+  }
   public getAddress(){
     return this.address.getAddress();
   }
