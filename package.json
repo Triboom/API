@@ -7,7 +7,12 @@
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
+    "copy:manifest": "node -e \"require('fs').copyFile('./manifest.yml', './dist/manifest.yml', function(err) { if (err) console.log(err); console.log('manifest.yml copied!') })\"",
+    "copy:ormconfig": "node -e \"require('fs').copyFile('./ormconfig.js', './dist/ormconfig.js', function(err) { if (err) console.log(err); console.log('ormconfig.js copied!') })\"",
+    "copy:package": "node -e \"require('fs').copyFile('./package.json', './dist/package.json', function(err) { if (err) console.log(err); console.log('package.json copied!') })\"",
+    "copy:users": "node -e \"require('fs').copyFile('src/common/infrastructure/persistence/typeorm/migrations/users.sql', './dist/common/infrastructure/persistence/typeorm/migrations/users.sql', function(err) { if (err) console.log(err); console.log('users.sql copied!') })\"",
     "build": "nest build",
+    "postbuild": "run-p copy:manifest copy:ormconfig copy:package copy:users",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -19,7 +24,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "typeorm": "NODE_ENV=migration ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "typeorm:win": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
@@ -32,10 +37,11 @@
     "moment-timezone": "^0.5.33",
     "mysql": "^2.18.1",
     "node-sql-reader": "^0.1.3",
+    "npm-run-all": "^4.1.5",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
-    "typeorm": "^0.2.38",
+    "typeorm": "^0.2.41",
     "typescript-result": "^1.2.0"
   },
   "devDependencies": {
@@ -77,5 +83,8 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "engines": {
+    "node": "14.17.6"
   }
 }
