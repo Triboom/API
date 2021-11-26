@@ -22,17 +22,15 @@ export class SaleApplicationService {
     }
     const registerSaleCommand: RegisterSaleCommand = new RegisterSaleCommand(
       registerSaleRequestDto.orderQuantity,
-      registerSaleRequestDto.dateTime,
       registerSaleRequestDto.orderStatus,
       registerSaleRequestDto.customerId,
       registerSaleRequestDto.productId,
-      registerSaleRequestDto.price
+      String(registerSaleRequestDto.price)
     );
     const saleId = await this.commandBus.execute(registerSaleCommand);
     const registerSaleResponseDto: RegisterSaleResponseDto = new RegisterSaleResponseDto(
       saleId,
       registerSaleRequestDto.orderQuantity,
-      registerSaleRequestDto.dateTime,
       registerSaleRequestDto.orderStatus,
       registerSaleRequestDto.customerId,
       registerSaleRequestDto.productId,

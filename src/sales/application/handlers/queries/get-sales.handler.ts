@@ -14,7 +14,6 @@ export class GetSalesHandler implements IQueryHandler<GetSalesQuery>{
           id,
           orderQuantity,
           orderStatus,
-          dateTime,
           ammount,
           currency,
           customer_id,
@@ -30,8 +29,8 @@ export class GetSalesHandler implements IQueryHandler<GetSalesQuery>{
       saleDto.id = Number(ormSales.id);
       saleDto.orderQuantity = ormSales.orderQuantity;
       saleDto.orderStatus = ormSales.orderStatus;
-      saleDto.dateTime = ormSales.dateTime;
-      saleDto.price = ormSales.price;
+      saleDto.ammount = ormSales.ammount;
+      saleDto.currency = ormSales.currency;
       saleDto.customerId = ormSales.customerId;
       saleDto.productId = ormSales.productId;
       return saleDto;

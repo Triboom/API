@@ -16,9 +16,6 @@ export class SaleTypeORM {
   @Column((type) => SaleOrderQuantityTypeORM, { prefix: false })
   public orderQuantity: SaleOrderQuantityTypeORM;
 
-  @Column((type) => SaleDateTimeTypeORM, { prefix: false })
-  public dateTime: SaleDateTimeTypeORM;
-
   @Column((type) => SaleOrderStatusTypeORM, { prefix: false })
   public orderStatus: SaleOrderStatusTypeORM;
 

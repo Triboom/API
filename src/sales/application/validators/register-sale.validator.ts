@@ -20,19 +20,17 @@ export class RegisterSaleValidator{
       notification.addError('Sale orderQuantity is required or is less than 0', null);
     }
 
-    const date: Date = registerSaleRequestDto.dateTime;
-    if (date == null) {
-      notification.addError('Sale dateTime is required', null);
-    }
-
     const orderStatus: Boolean = registerSaleRequestDto.orderStatus;
     if (orderStatus == null) {
       notification.addError('Sale orderStatus is required', null);
     }
 
     const price: number = registerSaleRequestDto.price;
-    if (price == null) {
-      notification.addError('Sale price amount is required', null);
+    if (price < 0) {
+      notification.addError('Product price is required', null);
+    }
+    if (notification.hasErrors()) {
+      return notification;
     }
 
     const productId: number = registerSaleRequestDto.productId;

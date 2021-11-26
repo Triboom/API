@@ -7,11 +7,12 @@ import { SaleRegisteredHandler } from './application/handlers/events/SaleRegiste
 import { GetSalesHandler } from './application/handlers/queries/get-sales.handler';
 import { SalesController } from './api/sales.controller';
 import { RegisterSaleValidator } from './application/validators/register-sale.validator';
-import { SaleApplicationService } from './application/services/sales-applicationService';
+import { SaleApplicationService } from './application/services/sales-application.service';
+import { GetSaleByIdHandler } from './application/handlers/queries/get-sale-by-id.handler';
 
 export const CommandHandlers = [RegisterSaleHandler];
 export const EventHandlers = [SaleRegisteredHandler];
-export const QueryHandlers = [GetSalesHandler];
+export const QueryHandlers = [GetSalesHandler, GetSaleByIdHandler];
 
 @Module({
   imports: [

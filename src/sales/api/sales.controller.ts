@@ -1,12 +1,13 @@
-import { Body, Controller, Get, Post, Res } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
 import { QueryBus } from "@nestjs/cqrs";
 import { ApiController } from "src/common/api/api.controller";
 import { AppNotification } from "src/common/application/app.notification";
-import { SaleApplicationService } from '../application/services/sales-applicationService';
+import { SaleApplicationService } from '../application/services/sales-application.service';
 import { RegisterSaleRequestDto } from '../application/dtos/request/register-sale-request.dto';
 import { RegisterSaleResponseDto } from '../application/dtos/response/register-sale-response.dto';
 import { GetSalesQuery } from '../application/queries/get-sales.query';
 import { Result } from "typescript-result";
+import { GetSaleByIdQuery } from '../application/queries/get-sale-by-id.query';
 
 @Controller('sales')
 export class SalesController{
@@ -34,9 +35,19 @@ export class SalesController{
   }
 
   @Get()
-  async getCustomers(@Res({passthrough: true}) response): Promise<object> {
+  async getSales(@Res({passthrough: true}) response): Promise<object> {
     try {
       const sales = await this.queryBus.execute(new GetSalesQuery());
+      return ApiController.ok(response, sales);
+    } catch(error){
+      return ApiController.serverError(response, error);
+    }
+  }
+
+  @Get('/:id')
+  async getSaleById(@Param('id') saleId: number, @Res({passthrough: true}) response): Promise<object> {
+    try {
+      const sales = await this.queryBus.execute(new GetSaleByIdQuery(saleId));
       return ApiController.ok(response, sales);
     } catch(error){
       return ApiController.serverError(response, error);

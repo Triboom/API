@@ -17,21 +17,20 @@ export class Sale extends AggregateRoot{
   private customerId: CustomerId;
   private productId: ProductId;
   private orderQuantity: OrderQuantity;
-  private dateTime: DateTime;
   private orderStatus: OrderStatus;
   private price: Money;
 
-  constructor(orderQuantity: OrderQuantity, dateTime: DateTime, orderStatus: OrderStatus, customerId: CustomerId, productId: ProductId) {
+  constructor(orderQuantity: OrderQuantity, orderStatus: OrderStatus, customerId: CustomerId, productId: ProductId, price: Money) {
     super();
     this.orderQuantity = orderQuantity;
-    this.dateTime = dateTime;
     this.orderStatus = orderStatus;
     this.productId = productId;
     this.customerId = customerId;
+    this.price = price;
   }
 
   public register() {
-    const event = new SaleRegistered(this.id.getValue(), this.orderQuantity.getValue(), this.dateTime.getValue(), this.orderStatus.getValue(), this.customerId.getValue(), this.productId.getValue(), this.price.getValue());
+    const event = new SaleRegistered(this.id.getValue(), this.orderQuantity.getValue(), this.orderStatus.getValue(), this.customerId.getValue(), this.productId.getValue(), String(this.price.getAmount()));
     this.apply(event);
   }
 
@@ -52,9 +51,6 @@ export class Sale extends AggregateRoot{
     return this.orderQuantity;
   }
 
-  public getDateTime(): DateTime {
-    return this.dateTime;
-  }
   public getOrderStatus(): OrderStatus {
     return this.orderStatus;
   }
@@ -78,10 +74,6 @@ export class Sale extends AggregateRoot{
 
   public changeOrderQuantity(orderQuantity: OrderQuantity): void {
     this.orderQuantity = orderQuantity;
-  }
-
-  public changeDateTime(dateTime: DateTime): void {
-    this.dateTime = dateTime;
   }
 
   public changeOrderStatus(orderStatus: OrderStatus): void {

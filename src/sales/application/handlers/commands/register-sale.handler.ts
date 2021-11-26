@@ -33,10 +33,6 @@ export class RegisterSaleHandler implements ICommandHandler<RegisterSaleCommand>
     if (orderQuantityResult.isFailure()) {
       return 0;
     }
-    const dateTimeResult: Result<AppNotification, DateTime> = DateTime.create(command.dateTime);
-    if (dateTimeResult.isFailure()) {
-      return 0;
-    }
 
     const orderStatusResult: Result<AppNotification, OrderStatus> = OrderStatus.create(command.orderStatus);
     if (orderStatusResult.isFailure()) {
@@ -53,12 +49,12 @@ export class RegisterSaleHandler implements ICommandHandler<RegisterSaleCommand>
       return 0;
     }
 
-    const priceResult : Result<AppNotification, Money> = Money.create(command.price, "PEN")
+    const priceResult: Result<AppNotification, Money> = Money.create(Number(command.price), "PEN");
     if(priceResult.isFailure()){
       return 0;
     }
     
-    let sale: Sale = SaleFactory.createFrom(orderQuantityResult.value, dateTimeResult.value, orderStatusResult.value, customerIdResult.value, productIdResult.value);
+    let sale: Sale = SaleFactory.createFrom(orderQuantityResult.value,orderStatusResult.value, customerIdResult.value, productIdResult.value, priceResult.value);
     let saleTypeORM = SaleMapper.toTypeORM(sale);
     saleTypeORM = await this.saleRepository.save(saleTypeORM);
     if (saleTypeORM == null) {

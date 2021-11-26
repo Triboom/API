@@ -13,7 +13,6 @@ export class SaleMapper {
     const saleTypeORM: SaleTypeORM = new SaleTypeORM();
     //saleTypeORM.id = SaleIdTypeORM.from(sale.getId().getValue());
     saleTypeORM.orderQuantity = SaleOrderQuantityTypeORM.from(sale.getOrderQuantity().getValue());
-    saleTypeORM.dateTime = SaleDateTimeTypeORM.from(sale.getDateTime().getValue());
     saleTypeORM.orderStatus = SaleOrderStatusTypeORM.from(sale.getOrderStatus().getValue());
     saleTypeORM.customerId = CustomerIdForSalesTypeORM.from(sale.getCustomerId().getValue());
     saleTypeORM.productId = ProductIdForSalesTypeORM.from(sale.getProductId().getValue());
