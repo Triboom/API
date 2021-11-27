@@ -34,8 +34,8 @@ export class DiscountMoneyHandler implements ICommandHandler<DiscountMoney> {
     if(saleTypeORM == null){
       return discountId;
     }
-    const amountDiscount: DiscountValue = DiscountValue.create(command.discount);
     const saleId: SaleId = SaleId.of(command.saleId);
+    const amountDiscount: DiscountValue = DiscountValue.create(command.discount);
     let discount: Discount = DiscountFactory.createFrom(DiscountStatus.STARTED, amountDiscount, saleId);
     let discountTypeORM: DiscountTypeORM = DiscountMapper.toTypeORM(discount);
     discountTypeORM = await this.discountRepository.save(discountTypeORM);

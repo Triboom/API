@@ -35,6 +35,7 @@ export class ApplyDiscountHandler implements IEventHandler<ApplyDiscount> {
       console.log('ApplyDiscount saleTypeORM not found');
       return;
     }
+    console.log(saleTypeORM.id);
     const saleIdResult: Result<AppNotification, SaleId> = SaleId.create(saleTypeORM.id);
     if (saleIdResult.isFailure()) {
       return;
@@ -59,16 +60,15 @@ export class ApplyDiscountHandler implements IEventHandler<ApplyDiscount> {
       return;
     }
     saleTypeORM = SaleMapper.toTypeORM(sale);
-
+    saleTypeORM = await this.saleRepository.save(saleTypeORM);
     await getManager().transaction(async transactionalEntityManager => {
       //await transactionalEntityManager.save(saleTypeORM)
-    saleTypeORM = await this.saleRepository.save(saleTypeORM);
       if (saleTypeORM == null) {
         console.log('ApplyDiscount error');
         return;
       }
-      const completeDiscount: CompleteDiscount = new CompleteDiscount(event.discountId);
-      await this.commandBus.execute(completeDiscount);
+      //const completeDiscount: CompleteDiscount = new CompleteDiscount(event.discountId);
+      //await this.commandBus.execute(completeDiscount);
     });
   }
 }
