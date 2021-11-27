@@ -11,4 +11,10 @@ export class SaleFactory {
   public static createFrom(orderQuantity: OrderQuantity, orderStatus: OrderStatus, customerId: CustomerId, productId: ProductId , price:Money): Sale {
     return new Sale(orderQuantity, orderStatus, customerId, productId, price);
   }
+
+  public static withId(saleId: SaleId, orderQuantity: OrderQuantity, orderStatus: OrderStatus, customerId: CustomerId, productId: ProductId , price:Money): Sale {
+    let sale: Sale = new Sale(orderQuantity, orderStatus, customerId, productId, price);
+    sale.changeId(saleId);
+    return sale;
+  }
 }

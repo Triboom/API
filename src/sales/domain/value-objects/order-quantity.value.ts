@@ -23,6 +23,7 @@ export class OrderQuantity{
     return Result.ok(new OrderQuantity(quantity));
   }
 
+
   public getValue(): number {
     return this.quantity;
   }

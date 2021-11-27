@@ -19,7 +19,7 @@ export class Discount extends AggregateRoot {
   }
 
   public applyDiscount() {
-    const event = new ApplyDiscount(this.id.getValue(), this.saleId.getValue(), this.discount.getValue());
+    const event = new ApplyDiscount(this.id.getValue(), this.saleId.getValue(), this.discount.getValue(), this.status);
     this.apply(event);
   }
 

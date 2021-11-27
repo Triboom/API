@@ -25,4 +25,8 @@ export class CustomerId {
   public getValue(): number {
     return this.value;
   }
+
+  public static of(value: number): CustomerId {
+    return new CustomerId(value);
+  }
 }

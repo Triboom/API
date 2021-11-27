@@ -26,4 +26,8 @@ export class ProductId {
   public getValue(): number {
     return this.value;
   }
+
+  public static of(value: number): ProductId {
+    return new ProductId(value);
+  }
 }

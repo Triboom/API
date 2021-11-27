@@ -8,8 +8,9 @@ import { DiscountMoneyValidator } from './application/validators/discount-money.
 import { SaleTypeORM } from '../sales/infrastructure/persistence/typeorm/entities/sale.typeorm';
 import { DiscountMoneyHandler } from './application/handlers/commands/discount-money.handler';
 import { ApplyDiscountedHandler } from './application/handlers/events/apply-discounted.handler';
+import { CompleteDiscount } from './application/commands/complete-discount.command';
 
-export const CommandHandlers = [DiscountMoneyHandler];
+export const CommandHandlers = [DiscountMoneyHandler, CompleteDiscount];
 export const EventHandlers = [ApplyDiscountedHandler];
 export const QueryHandlers = [];
 

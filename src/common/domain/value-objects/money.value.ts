@@ -10,6 +10,7 @@ export class Money {
     this.currency = currency;
   }
 
+
   public static create(amount: number, currency: string): Result<AppNotification, Money> {
     let notification: AppNotification = new AppNotification();
     currency = (currency ?? "").trim();
@@ -25,12 +26,15 @@ export class Money {
     return Result.ok(new Money(amount,currency));
   }
 
-  public add(other: Money): Money {
-    return this.newMoney(this.amount + other.getAmount());
+  public static create_money(amount: number, currency: string): Money {
+    return new Money(
+      amount,
+      currency,
+    );
   }
 
-  public subtract(other: Money): Money {
-    return this.newMoney(this.amount - other.getAmount());
+  public markdown(other: Money): Money {
+    return this.newMoney(this.amount - (other.getAmount() / 100 * this.amount));
   }
 
   private newMoney(amount: number): Money {

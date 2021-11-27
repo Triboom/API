@@ -45,7 +45,7 @@ export class DiscountMoneyHandler implements ICommandHandler<DiscountMoney> {
     discountId = Number(discountTypeORM.id);
     discount.changeId(DiscountId.of(discountId));
     discount = this.publisher.mergeObjectContext(discount);
-    //discount.deposit();
+    discount.applyDiscount();
     discount.commit();
     return discountId;
   }

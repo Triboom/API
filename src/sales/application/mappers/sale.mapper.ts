@@ -11,7 +11,7 @@ import { MoneyTypeORM } from 'src/common/infrastructure/persistence/typeorm/enti
 export class SaleMapper {
   public static toTypeORM(sale: Sale): SaleTypeORM {
     const saleTypeORM: SaleTypeORM = new SaleTypeORM();
-    //saleTypeORM.id = SaleIdTypeORM.from(sale.getId().getValue());
+    saleTypeORM.id = sale.getId() != null ? sale.getId().getValue() : 0;
     saleTypeORM.orderQuantity = SaleOrderQuantityTypeORM.from(sale.getOrderQuantity().getValue());
     saleTypeORM.orderStatus = SaleOrderStatusTypeORM.from(sale.getOrderStatus().getValue());
     saleTypeORM.customerId = CustomerIdForSalesTypeORM.from(sale.getCustomerId().getValue());

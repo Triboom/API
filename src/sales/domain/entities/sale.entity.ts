@@ -14,8 +14,8 @@ import { AppNotification } from "../../../common/application/app.notification";
 
 export class Sale extends AggregateRoot{
   private id: SaleId;
-  private customerId: CustomerId;
-  private productId: ProductId;
+  private readonly customerId: CustomerId;
+  private readonly productId: ProductId;
   private orderQuantity: OrderQuantity;
   private orderStatus: OrderStatus;
   private price: Money;
@@ -33,18 +33,29 @@ export class Sale extends AggregateRoot{
     const event = new SaleRegistered(this.id.getValue(), this.orderQuantity.getValue(), this.orderStatus.getValue(), this.customerId.getValue(), this.productId.getValue(), String(this.price.getAmount()));
     this.apply(event);
   }
-
-
   
-  private calcPrice(){
-    // ammount = Product by ID .getPrice() * this.orderQuantity
-    // currency = Product by ID .getCurrency();
-    // this.price = new Money(ammount, currency);
-    console.log("First we need to have a unit price of product")
+  public discount(amount: Money): Result<AppNotification, Sale>{
+    const notification: AppNotification = this.validate(amount);
+    if(this.price.getAmount() == 0){
+      notification.addError('Cannot discount in this sale, amount is greater than 0', null);
+    }
+    if (notification.hasErrors()) {
+      return Result.error(notification);
+    }
+    this.price = this.price.markdown(amount);
+    return Result.ok(this);
   }
 
   public getId(): SaleId {
     return this.id;
+  }
+
+  public validate(amount: Money): AppNotification {
+    const notification: AppNotification = new AppNotification();
+    if (amount.getAmount() <= 0) {
+      notification.addError('The amount must be greater than zero', null);
+    }
+    return notification;
   }
 
   public getOrderQuantity(): OrderQuantity {
