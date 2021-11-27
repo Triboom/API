@@ -21,7 +21,7 @@ export class GetSaleByIdHandler implements IQueryHandler<GetSaleByIdQuery>{
     FROM
         sales s
     WHERE
-        s.id = ?;
+        s.product_id = ?;
     `
     const ormSales = await manager.query(sql, [query.saleId]);
     if(ormSales.length <= 0){
