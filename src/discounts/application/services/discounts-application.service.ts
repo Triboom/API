@@ -13,17 +13,19 @@ export class DiscountsApplicationService {
   constructor(
     private commandBus: CommandBus,
     private discountValidator: DiscountMoneyValidator,
-  ) {}
+  ) {
+  }
 
-  async discount(discountRequestDto: DiscountRequestDto): Promise<Result<AppNotification, DiscountResponseDto>>{
+  async discount(discountRequestDto: DiscountRequestDto,
+  ): Promise<Result<AppNotification, DiscountResponseDto>> {
     const notification: AppNotification = await this.discountValidator.validate(discountRequestDto);
-    if(notification.hasErrors()){
+    if (notification.hasErrors()) {
       return Result.error(notification);
     }
-    const discountMoney = new DiscountMoney(
+    const discountMoney: DiscountMoney = new DiscountMoney(
       discountRequestDto.saleId,
       discountRequestDto.discount,
-      DiscountStatus.STARTED
+      DiscountStatus.STARTED,
     );
     const discountId: number = await this.commandBus.execute(discountMoney);
     const discountResponseDto: DiscountResponseDto = new DiscountResponseDto(

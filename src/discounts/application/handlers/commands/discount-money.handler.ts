@@ -10,6 +10,7 @@ import { DiscountFactory } from '../../../domain/factories/discount.factory';
 import { DiscountStatus } from '../../../domain/enums/discount.status.enum';
 import { DiscountMapper } from '../../mappers/discount.mapper';
 import { DiscountId } from '../../../domain/value-objects/discount-id.value';
+import { SaleId } from '../../../../sales/domain/value-objects/sale-id.value';
 
 @CommandHandler(DiscountMoney)
 export class DiscountMoneyHandler implements ICommandHandler<DiscountMoney> {
@@ -22,19 +23,20 @@ export class DiscountMoneyHandler implements ICommandHandler<DiscountMoney> {
 
   async execute(command: DiscountMoney){
     let discountId: number = 0;
-    const saleId: string = command.saleId.trim();
+    const sale_Id: number = command.saleId;
     const saleTypeORM: SaleTypeORM = await this.saleRepository
       .createQueryBuilder()
       .setLock('pessimistic_read')
       .useTransaction(true)
       .where('id = :saleId')
-      .setParameter("saleId", saleId)
+      .setParameter("saleId", sale_Id)
       .getOne();
     if(saleTypeORM == null){
       return discountId;
     }
     const amountDiscount: DiscountValue = DiscountValue.create(command.discount);
-    let discount: Discount = DiscountFactory.createFrom(DiscountStatus.STARTED, amountDiscount, null);
+    const saleId: SaleId = SaleId.of(command.saleId);
+    let discount: Discount = DiscountFactory.createFrom(DiscountStatus.STARTED, amountDiscount, saleId);
     let discountTypeORM: DiscountTypeORM = DiscountMapper.toTypeORM(discount);
     discountTypeORM = await this.discountRepository.save(discountTypeORM);
     if (discountTypeORM == null) {

@@ -61,7 +61,7 @@ export class RegisterSaleHandler implements ICommandHandler<RegisterSaleCommand>
 
       return 0;
     }
-    const saleId:number = Number(saleTypeORM.id.value);
+    const saleId:number = Number(saleTypeORM.id);
     sale.changeId(SaleId.createSale(saleId));
     sale = this.publisher.mergeObjectContext(sale);
     sale.register();

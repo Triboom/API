@@ -12,8 +12,8 @@ export class DiscountMoneyValidator {
 
   public async validate(discountRequestDto: DiscountRequestDto): Promise<AppNotification> {
     let notification: AppNotification = new AppNotification();
-    const saleId: string = discountRequestDto.saleId.trim();
-    if(saleId.length <= 0){
+    const saleId: number = discountRequestDto.saleId;
+    if(saleId == null){
       notification.addError('Sale id is required', null);
     }
     if(notification.hasErrors()){

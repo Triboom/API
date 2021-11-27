@@ -1,4 +1,4 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, Unique } from 'typeorm';
 import { SaleIdTypeORM } from './sale.id.typeorm';
 import { SaleOrderQuantityTypeORM } from './sale.order-quantity.typeorm';
 import { SaleDateTimeTypeORM } from './sale.date-time.typeorm';
@@ -11,7 +11,7 @@ import { ProductIdForSalesTypeORM } from './product-id-sale.typeorm';
 @Entity('sales')
 export class SaleTypeORM {
   @Column((type) => SaleIdTypeORM, { prefix: false })
-  public id: CustomerIdTypeORM;
+  public id: number;
 
   @Column((type) => SaleOrderQuantityTypeORM, { prefix: false })
   public orderQuantity: SaleOrderQuantityTypeORM;

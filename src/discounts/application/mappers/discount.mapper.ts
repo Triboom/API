@@ -4,7 +4,7 @@ import { SaleIdForDiscountsTypeORM } from '../../infrastructure/persistence/type
 import { DiscountValueTypeORM } from '../../infrastructure/persistence/typeorm/value-objects/discount-value.typeorm';
 
 export class DiscountMapper {
-  public static toTypeORM(discount: Discount): DiscountTypeORM{
+  public static toTypeORM(discount: Discount): DiscountTypeORM {
     const discountTypeORM: DiscountTypeORM = new DiscountTypeORM();
     discountTypeORM.status = discount.getStatus();
     discountTypeORM.discountValue = DiscountValueTypeORM.from(discount.getDiscount().getValue());

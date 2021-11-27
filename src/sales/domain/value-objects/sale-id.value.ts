@@ -5,7 +5,7 @@ export class SaleId{
   private readonly value: number;
 
   private constructor(value: number) {
-    this.value = value;
+    this.value = Number(value);
   }
 
   public static create(value: number): Result<AppNotification, SaleId>{
@@ -24,6 +24,10 @@ export class SaleId{
   }
 
   public getValue(): number {
-    return this.value;
+    return Number(this.value);
+  }
+
+  public static of(value: number): SaleId {
+    return new SaleId(value);
   }
 }
